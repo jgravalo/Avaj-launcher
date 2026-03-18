@@ -1,0 +1,6 @@
+tar -xzf avaj-launcher.tar.gz
+cd avaj-launcher
+find * -name "*.java" > sources.txt
+javac @sources.txt
+java ro.academyplus.avaj.simulator.Simulator scenario.txt
+cat simulation.txt
