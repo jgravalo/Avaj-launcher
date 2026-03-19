@@ -68,6 +68,8 @@ Helicopter H4 20 5 70
 
 ```
 avaj-launcher/
+├── Makefile
+├── sources.txt
 ├── scenario.txt
 └── avaj/
     ├── Simulator.java                ← main entry point
