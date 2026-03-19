@@ -35,8 +35,7 @@ Aircraft react to four weather conditions — **SUN, RAIN, FOG, SNOW** — by ad
 ### Compile
 
 ```bash
-find . -name "*.java" > sources.txt
-javac @sources.txt
+make
 ```
 
 ### Run
