@@ -1,5 +1,7 @@
 all:
 	javac @sources.txt
+
+test:
 	java avaj.Simulator scenario.txt
 
 clean:
@@ -10,4 +12,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all test clean fclean re
