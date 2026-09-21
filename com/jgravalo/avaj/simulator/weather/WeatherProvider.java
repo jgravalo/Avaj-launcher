@@ -1,4 +1,6 @@
-package com.jgravalo.avaj.simulator;
+package com.jgravalo.avaj.simulator.weather;
+
+import com.jgravalo.avaj.simulator.Coordinates;
 
 public class WeatherProvider {
     private static final WeatherProvider instance = new WeatherProvider();

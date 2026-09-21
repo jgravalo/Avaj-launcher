@@ -1,5 +1,7 @@
 package com.jgravalo.avaj.simulator;
 
+import com.jgravalo.avaj.simulator.exceptions.InvalidScenarioException;
+import com.jgravalo.avaj.simulator.weather.WeatherTower;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

@@ -1,5 +1,7 @@
-package com.jgravalo.avaj.simulator;
+package com.jgravalo.avaj.simulator.weather;
 
+import com.jgravalo.avaj.simulator.Flyable;
+import com.jgravalo.avaj.simulator.Logger;
 import java.util.ArrayList;
 import java.util.List;
 

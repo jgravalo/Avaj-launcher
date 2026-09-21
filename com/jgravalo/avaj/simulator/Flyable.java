@@ -1,5 +1,7 @@
 package com.jgravalo.avaj.simulator;
 
+import com.jgravalo.avaj.simulator.weather.WeatherTower;
+
 public abstract class Flyable {
     protected WeatherTower weatherTower;
 

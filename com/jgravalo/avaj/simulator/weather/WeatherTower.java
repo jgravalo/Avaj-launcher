@@ -1,4 +1,6 @@
-package com.jgravalo.avaj.simulator;
+package com.jgravalo.avaj.simulator.weather;
+
+import com.jgravalo.avaj.simulator.Coordinates;
 
 public class WeatherTower extends Tower {
 

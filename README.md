@@ -81,13 +81,17 @@ avaj-launcher/
     ├── JetPlane.java
     ├── Helicopter.java
     ├── Coordinates.java              ← immutable 3D point
-    ├── Tower.java                    ← observable: register / unregister / conditionChanged
-    ├── WeatherTower.java             ← Tower that triggers weather changes
-    ├── WeatherProvider.java          ← Singleton weather generator
     ├── AircraftFactory.java          ← Singleton factory
     ├── Logger.java                   ← writes simulation.txt
-    └── InvalidScenarioException.java ← custom exception (bonus)
+    ├── weather/
+    │   ├── Tower.java                ← observable: register / unregister / conditionChanged
+    │   ├── WeatherTower.java         ← Tower that triggers weather changes
+    │   └── WeatherProvider.java      ← Singleton weather generator
+    └── exceptions/
+        └── InvalidScenarioException.java ← custom exception (bonus)
 ```
+
+Aircraft classes share the package with `Coordinates` and `Simulator` because the UML declares the `Coordinates` constructor package-private.
 
 The class structure follows the UML class diagram provided with the subject.
 
