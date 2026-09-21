@@ -6,7 +6,24 @@ Aircraft simulation program built as part of the **42 Network** curriculum. Mode
 
 ## Description
 
-Aircraft react to four weather conditions — **SUN, RAIN, FOG, SNOW** — by adjusting their coordinates each simulation round. When an aircraft reaches ground level (height 0), it lands and unregisters automatically. All events are logged to `simulation.txt`.
+Avaj Launcher is the first project of the Java branch at 42. The goal is to turn a given UML class diagram into clean object-oriented code, applying the **Observer**, **Singleton** and **Factory** design patterns.
+
+The program simulates aircraft flying under changing weather conditions:
+
+1. It reads a scenario file: the first line is the number of simulation rounds, and each following line describes an aircraft (`TYPE NAME LONGITUDE LATITUDE HEIGHT`).
+2. The whole file is validated first. On invalid input, an error is printed to standard output and the program stops without writing any output file.
+3. Each aircraft is created through the factory and registers to the weather tower.
+4. On every round the weather changes. Each point in 3D space has its own weather — **SUN, RAIN, FOG** or **SNOW** — so each aircraft moves according to its type and the weather at its position, and logs a message.
+5. Height is capped at 100. When an aircraft reaches height 0, it lands and unregisters from the tower.
+6. Every event is written to `simulation.txt`.
+
+### How the code is organized
+
+- **`Simulator`** is the entry point: it validates the scenario, then runs the simulation.
+- **Aircraft**: `Flyable` (abstract) → `Aircraft` → `Balloon`, `JetPlane`, `Helicopter`. Each type defines its reaction to the weather in `updateConditions()`.
+- **`weather/`**: `Tower` keeps the list of registered aircraft and notifies them (Observer), `WeatherTower` triggers the weather changes, and `WeatherProvider` computes the weather from the coordinates (Singleton).
+- **`AircraftFactory`** creates the right aircraft type and assigns each one a unique id (Singleton + Factory).
+- **`Coordinates`** is an immutable 3D point, **`Logger`** writes `simulation.txt`, and **`exceptions/`** holds the custom exception used for invalid scenarios (bonus).
 
 ---
 
@@ -44,6 +61,14 @@ javac @sources.txt
 ```bash
 java com.jgravalo.avaj.simulator.Simulator scenario.txt
 cat simulation.txt
+```
+
+### With make
+
+```bash
+make test                 # compile, run scenario.txt and print simulation.txt
+make test scenario1.txt   # same with another scenario file
+make fclean               # remove .class files and simulation.txt
 ```
 
 ---
