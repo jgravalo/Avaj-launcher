@@ -14,9 +14,9 @@ Aircraft react to four weather conditions — **SUN, RAIN, FOG, SNOW** — by ad
 
 | Pattern | Class | Description |
 |---|---|---|
-| Singleton | `WeatherTower` | Single global instance managing all weather events |
-| Observer | `Weatherable` | Aircraft register/unregister to receive weather updates |
-| Factory | `AircraftFactory` | Creates the correct aircraft type from the scenario file |
+| Observer | `Tower` / `Flyable` | Aircraft register to the `WeatherTower` and are notified on every weather change |
+| Singleton | `WeatherProvider` | Single instance that generates the weather for a given point |
+| Singleton + Factory | `AircraftFactory` | Single instance that creates the correct aircraft type and assigns unique ids |
 
 ---
 
@@ -35,13 +35,14 @@ Aircraft react to four weather conditions — **SUN, RAIN, FOG, SNOW** — by ad
 ### Compile
 
 ```bash
-make
+find * -name "*.java" > sources.txt
+javac @sources.txt
 ```
 
 ### Run
 
 ```bash
-java avaj.Simulator scenario.txt
+java com.jgravalo.avaj.simulator.Simulator scenario.txt
 cat simulation.txt
 ```
 
@@ -59,8 +60,9 @@ Helicopter H4 20 5 70
 
 **Rules:**
 - Coordinates must be positive integers
-- Height must be between 0 and 100
+- Height above 100 is capped at 100
 - Valid types: `Balloon`, `JetPlane`, `Helicopter`
+- The whole file is validated before the simulation starts: on invalid input an error is printed to standard output and no `simulation.txt` is written
 
 ---
 
@@ -68,22 +70,26 @@ Helicopter H4 20 5 70
 
 ```
 avaj-launcher/
-├── Makefile
+├── makefile
 ├── sources.txt
 ├── scenario.txt
-└── avaj/
-    ├── Simulator.java                ← main entry point
-    ├── Tower.java                    ← logging base class
-    ├── WeatherTower.java             ← Singleton + Observable
-    ├── Weatherable.java              ← Observer interface
-    ├── Aircraft.java                 ← abstract base class
-    ├── AircraftFactory.java          ← Factory pattern
+└── com/jgravalo/avaj/simulator/
+    ├── Simulator.java                ← entry point: validates the scenario, then runs it
+    ├── Flyable.java                  ← abstract observer
+    ├── Aircraft.java                 ← base aircraft: movement, landing, log format
     ├── Balloon.java
     ├── JetPlane.java
     ├── Helicopter.java
-    ├── Coordinates.java
+    ├── Coordinates.java              ← immutable 3D point
+    ├── Tower.java                    ← observable: register / unregister / conditionChanged
+    ├── WeatherTower.java             ← Tower that triggers weather changes
+    ├── WeatherProvider.java          ← Singleton weather generator
+    ├── AircraftFactory.java          ← Singleton factory
+    ├── Logger.java                   ← writes simulation.txt
     └── InvalidScenarioException.java ← custom exception (bonus)
 ```
+
+The class structure follows the UML class diagram provided with the subject.
 
 ---
 
